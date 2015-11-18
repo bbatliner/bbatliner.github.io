@@ -1,0 +1,87 @@
+body {
+    background-color: #F2F9FE;
+}
+#logo {
+    height: 220px;
+}
+#logo-lg {
+    height: 325px;
+}
+h1 {
+    font-size: 48px !important;
+}
+@media (max-width: 992px) {
+    #logo {
+        height: 155px;
+    }
+    #logo-lg {
+        height: 155px;
+    }
+    h1 {
+        font-size: 38px !important;
+    }
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.jumbotron {
+    margin: 50px 10px;
+    background-color: rgba(205, 233, 254, 0.5);
+    text-align: center;
+}
+.mt {
+    margin-top: 50px;
+}
+h2 {
+    font-weight: normal;
+    color: #5dca88;
+    font-size: 36px;
+    line-height: 48px;
+}
+h3 {
+    color: #ccc;
+    font-weight: 400;
+    font-size: 28px;
+}
+h3.header {
+    color: #000;
+}
+p {
+    padding: 0;
+    margin-bottom: 12px;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 30px;
+    color: #666;
+    margin-top: 10px;
+}
+hr.short-gray-hr {
+    width: 25%;
+    border-bottom: 3px solid #ccc;
+    margin-left: 0;
+}
+hr.long-gray-hr {
+    width: 100%;
+    border-bottom: 3px solid #ccc;
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.subscribe {
+    margin-bottom: 10px;
+}
+.btn {
+    width: 100%;
+    line-height: 26px;
+    font-size: 16px;
+    text-transform: none;
+}
+.btn-green {
+    color: white;
+    background-color: #5dca88;
+}
+.btn-green:hover {
+    background-color: #2a9755;
+}

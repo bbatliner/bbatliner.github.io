@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5 mt">
+                    <h3 class="header">
+                        A ($1 per listing)
+                    </h3>
+                    <hr class="long-gray-hr pull-left">
+                    <h4>Pageviews:</h4>
+                    <strong><span id="pageviews-a"></span></strong>
+                    <h4>Number interested:</h4>
+                    <strong><span id="interested-a"></span></strong>
+                    <h4>Interested Rate:</h4>
+                    <strong><span id="interested-rate-a"></span></strong>
+                    <h4>Emails submitted:</h4>
+                    <strong><span id="emails-a"></span></strong>
+                    <h4>Conversion rate:</h4>
+                    <strong><span id="conversion-rate-a"></span></strong>
+                </div>
+                <div class="col-md-5 mt">
+                    <h3 class="header">
+                        B ($2.99 one-time fee)
+                    </h3>
+                    <hr class="long-gray-hr pull-left">
+                    <h4>Pageviews:</h4>
+                    <strong><span id="pageviews-b"></span></strong>
+                    <h4>Number interested:</h4>
+                    <strong><span id="interested-b"></span></strong>
+                    <h4>Interested Rate:</h4>
+                    <strong><span id="interested-rate-b"></span></strong>
+                    <h4>Emails submitted:</h4>
+                    <strong><span id="emails-b"></span></strong>
+                    <h4>Conversion rate:</h4>
+                    <strong><span id="conversion-rate-b"></span></strong>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+
+        <script src="analytics.js"></script>
+    </body>
+</html>
