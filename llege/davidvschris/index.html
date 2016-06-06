@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            .half {
+                display: inline-block;
+                width: 200px;
+            }
+            .full {
+                display: inline-block;
+                width: 400px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div style="font-weight: bold">
+            <p class="half">David:</p>
+            <p id="davidScore" class="half"></p>
+            <p class="half">Chris:</p>
+            <p id="chrisScore" class="half"></p>
+        </div>
+
+        <div id="winner"></div>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="full">
+            <strong>David</strong>
+            <div id="davidBoard"></div>
+        </div>
+        <div class="full">
+            <strong>Chris</strong>
+            <div id="chrisBoard"></div>
+        </div>
+
+        <br>
+        <br>
+
+        <h4>Submit a new get</h4>
+        <form id="new">
+            <select id="who">
+                <option selected disabled>Please select a getter...</option>
+                <option value="david">David</option>
+                <option value="chris">Chris</option>
+            </select>
+            <input id="get" type="text" placeholder="Describe the get...">
+            <button type="button" id="submit">Add</button>
+        </form>
+
+        <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyB84iAqwPJqL5qtuyxLnrGLBMl2nloAiBI",
+            authDomain: "david-vs-chris.firebaseapp.com",
+            databaseURL: "https://david-vs-chris.firebaseio.com",
+            storageBucket: "",
+          };
+          firebase.initializeApp(config);
+        </script>
+
+        <script>
+            document.getElementById('submit').addEventListener('click', function() {
+                if (document.getElementById('who').selectedIndex === 0) {
+                    window.alert('Please select a getter!');
+                    return;
+                }
+                if (document.getElementById('get').value.length === 0) {
+                    window.alert('Please describe the get!');
+                    return;
+                }
+                firebase.database().ref(document.getElementById('who').value).push({
+                    get: document.getElementById('get').value,
+                    time: Date.now()
+                }, function() {
+                    window.alert('Your get has been gotten!');
+                    document.getElementById('get').value = '';
+                });
+            });
+
+            function populateScoreboard(name, snapshot) {
+                var board = document.getElementById(name + 'Board');
+                while (board.firstChild) {
+                    board.removeChild(board.firstChild);
+                }
+                var count = 0;
+                var val = snapshot.val();
+                for (var prop in val) {
+                    if (val.hasOwnProperty(prop)) {
+                        count++;
+                        var get = val[prop];
+                        var getEl = document.createElement('tr');
+                        getEl.innerHTML = (new Date(get.time).toLocaleString()) + ' ' + get.get;
+                        board.appendChild(getEl);
+                    }
+                }
+                var scoreEl = document.getElementById(name + 'Score');
+                scoreEl.innerHTML = count + ' gets';
+            }
+
+            function calculateWinner() {
+                var davidScore = Number.parseInt(document.getElementById('davidScore').innerHTML);
+                var chrisScore = Number.parseInt(document.getElementById('chrisScore').innerHTML);
+                if (davidScore > chrisScore) {
+                    document.getElementById('winner').innerHTML = 'David is the real Gitter!';
+                } else if (chrisScore > davidScore) {
+                    document.getElementById('winner').innerHTML = 'Chris is living up to his name!';
+                } else {
+                    document.getElementById('winner').innerHTML = 'A tie? You know what it is.';
+                }
+            }
+
+            firebase.database().ref('david').on('value', function(snapshot) {
+                populateScoreboard('david', snapshot);
+                calculateWinner();
+            });
+            firebase.database().ref('chris').on('value', function(snapshot) {
+                populateScoreboard('chris', snapshot);
+                calculateWinner();
+            });
+        </script>
+    </body>
+</html>
