@@ -93,12 +93,12 @@
                         count++;
                         var get = val[prop];
                         var getEl = document.createElement('tr');
-                        getEl.innerHTML = (new Date(get.time).toLocaleString()) + ' ' + get.get;
+                        getEl.innerText = getEl.textContent = (new Date(get.time).toLocaleString()) + ' ' + get.get;
                         board.appendChild(getEl);
                     }
                 }
                 var scoreEl = document.getElementById(name + 'Score');
-                scoreEl.innerHTML = count + ' gets';
+                scoreEl.innerText = scoreEl.textContent = count + ' gets';
             }
 
             function calculateWinner() {
