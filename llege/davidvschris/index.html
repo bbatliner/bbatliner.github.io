@@ -92,7 +92,7 @@
                     if (val.hasOwnProperty(prop)) {
                         count++;
                         var get = val[prop];
-                        var getEl = document.createElement('tr');
+                        var getEl = document.createElement('p');
                         getEl.innerText = getEl.textContent = (new Date(get.time).toLocaleString()) + ' ' + get.get;
                         board.appendChild(getEl);
                     }
