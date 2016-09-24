@@ -9,6 +9,7 @@
             .full {
                 display: inline-block;
                 width: 400px;
+                vertical-align: top;
             }
         </style>
     </head>
@@ -105,7 +106,7 @@
                 var davidScore = Number.parseInt(document.getElementById('davidScore').innerHTML);
                 var chrisScore = Number.parseInt(document.getElementById('chrisScore').innerHTML);
                 if (davidScore > chrisScore) {
-                    document.getElementById('winner').innerHTML = 'David is the real Gitter!';
+                    document.getElementById('winner').innerHTML = 'David is the real Giitter!';
                 } else if (chrisScore > davidScore) {
                     document.getElementById('winner').innerHTML = 'Chris is living up to his name!';
                 } else {
