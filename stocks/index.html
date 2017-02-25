@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <title>Stock Dashboard</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-Xqcy5ttufkC3rBa8EdiAyA1VgOGrmel2Y+wxm4K3kI3fcjTWlDWrlnxyD6hOi3PF" crossorigin="anonymous">
+        <style>
+            .link:hover {
+                cursor: pointer;
+            }
+            .input-group.transparent,
+            .input-group.transparent > .form-control,
+            .input-group.transparent > .input-group-addon {
+                background-color: transparent;
+                border: none;
+                box-shadow: none;
+                color: white;
+            }
+            .input-header {
+                font-size: 24px;
+                line-height: 1.5;
+                border-radius: 0;
+                height: 64px;
+                padding: 0 16px;
+            }
+            .container-fluid {
+                padding: 0 48px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="page-header">
+                <div class="input-group transparent">
+                    <span class="input-group-addon link" id="options-toggle"><i class="glyphicon glyphicon-cog"></i></span>
+                    <input type="text" class="form-control input-header" id="symbol" placeholder="Search">
+                    <span class="input-group-addon link" id="search"><i class="glyphicon glyphicon-search"></i></span>
+                </div>
+            </div>
+            <div id="options" class="hidden">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="control-label" for="from">From</label>
+                                <input type="date" id="from" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="to">To</label>
+                                <input type="date" id="to" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+            </div>
+            <div id="charts"></div>
+        </div>
+
+        <script>
+            function isObject (item) {
+                return (item && typeof item === 'object' && !Array.isArray(item))
+            }
+            function deepAssign (target, source) {
+                let output = Object.assign({}, target)
+                if (isObject(target) && isObject(source)) {
+                    Object.keys(source).forEach(key => {
+                        if (isObject(source[key])) {
+                            if (!(key in target))
+                                Object.assign(output, { [key]: source[key] })
+                            else
+                                output[key] = deepAssign(target[key], source[key])
+                        } else {
+                            Object.assign(output, { [key]: source[key] })
+                        }
+                    })
+                }
+                return output
+            }
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+        <script>
+            Chart.defaults.global = deepAssign(Chart.defaults.global, {
+                defaultColor: 'rgba(0,0,0,0.25)',
+                defaultFontColor: '#FFF',
+                elements: {
+                    line: {
+                        fill: false,
+                        borderWidth: 2,
+                        tension: 0.25
+                    },
+                    point: {
+                        radius: 0,
+                        hitRadius: 5,
+                        hoverRadius: 5
+                    }
+                },
+                title: {
+                    display: true,
+                    fontSize: 18,
+                    fontStyle: 'normal'
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    mode: 'label',
+                    callbacks: {
+                        label (tooltipItem, data) {
+                            return `${data.datasets[tooltipItem.datasetIndex].label}: ${tooltipItem.yLabel.toFixed(2)}`
+                        }
+                    }
+                }
+            })
+        </script>
+        <script src="bundle.js"></script>
+    </body>
+</html>
